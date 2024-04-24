@@ -1,7 +1,13 @@
+//A boa prática é sempre chamar as dependencias que foram instaladas, depois as qual você criou no projeto.
 const express = require('express');
 const path = require('path');
+const db = require('./database');
+const routes = require('./routes');
 
 const app = express();
+
+//conexão com o banco de dados
+db.connect()
 
 //Definindo o template engine
 app.set('view engine', 'ejs');
@@ -13,12 +19,8 @@ app.use(express.static(path.join(__dirname, 'public')))
 //Habilitada o server para receber dados via post (formulário)
 app.use(express.urlencoded({ extended: true }))
 
-//Rotas
-app.get('/', (req, res) => {
-    res.render('index', {
-        title: 'Teste CRUD'
-    })
-})
+//Definindo as rotas
+app.use('/', routes)
 
 //404 error (not found)
 app.use((req, res) => { //middleware
