@@ -1,6 +1,9 @@
 //A boa prática é sempre chamar as dependencias que foram instaladas, depois as qual você criou no projeto.
+//dependencias instaladas
 const express = require('express');
 const path = require('path');
+
+//dependencias criadas
 const db = require('./database');
 const routes = require('./routes');
 
